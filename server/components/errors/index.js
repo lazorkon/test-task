@@ -12,8 +12,13 @@ module.exports[404] = function pageNotFound(req, res) {
   };
 
   res.status(result.status);
-  res.render(viewFilePath, {}, function(err, html) {
-    if(err) {
+  // if request comes from angular - send response in JSON format
+  if (req.get('X-XSRF-TOKEN')) {
+    return res.status(result.status).json(result);
+  }
+
+  res.render(viewFilePath, {}, function (err, html) {
+    if (err) {
       return res.status(result.status).json(result);
     }
 

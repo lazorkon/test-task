@@ -46,12 +46,13 @@ module.exports = function makeWebpackConfig(options) {
                 'angular-aria',
                 'angular-cookies',
                 'angular-resource',
-
                 'angular-sanitize',
 
-
                 'angular-ui-router',
-                'lodash'
+                'lodash',
+
+                'highcharts',
+                'highcharts-ng',
             ]
         };
     }

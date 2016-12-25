@@ -1,36 +1,52 @@
 'use strict';
 
 import angular from 'angular';
-// import ngAnimate from 'angular-animate';
-import ngCookies from 'angular-cookies';
-import ngResource from 'angular-resource';
-import ngSanitize from 'angular-sanitize';
-
 import uiRouter from 'angular-ui-router';
+import loadingBar from 'angular-loading-bar';
+import toastr from 'angular-toastr';
 
-// import ngMessages from 'angular-messages';
-
+require('angular-lazy-image');
 
 import {
-  routeConfig
+  configureRoutes, configureApp, runApp
 } from './app.config';
 
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
-import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
+import common from './common';
+
+import report from './report';
+import userChart from './userChart';
 
 import './app.scss';
 
-angular.module('dashboardApp', [ngCookies, ngResource, ngSanitize, uiRouter, navbar, footer, main,
-  constants, util
+angular.module('app', [
+  // ngCookies,
+  // ngResource,
+  // ngSanitize,
+  uiRouter,
+  loadingBar,
+  toastr,
+  'afkl.lazyImage',
+
+  navbar,
+  footer,
+  common,
+  constants,
+  util,
+
+  report,
+  userChart
 ])
-  .config(routeConfig);
+  .config(configureRoutes)
+  .config(configureApp)
+  .run(runApp);
 
 angular.element(document)
   .ready(() => {
-    angular.bootstrap(document, ['dashboardApp'], {
+    angular.bootstrap(document, ['app'], {
       strictDi: true
     });
   });

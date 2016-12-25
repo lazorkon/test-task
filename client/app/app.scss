@@ -1,9 +1,11 @@
 $icon-font-path: '/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
-$fa-font-path: '/assets/fonts/font-awesome/';
-@import '~font-awesome/scss/font-awesome';
 
 // @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,900|Roboto:300,500,700,900);
+
+@import '../../node_modules/angular-loading-bar/build/loading-bar.css';
+@import '../../node_modules/angular-toastr/dist/angular-toastr.css';
+@import '../../node_modules/angular-lazy-image/release/lazy-image-style.css';
 
 /**
  * App-wide Styles
@@ -18,6 +20,6 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 
 // Component styles are injected through gulp
 /* inject:scss */
-@import 'admin/admin.scss';
-@import 'main/main.scss';
+@import 'report/report';
+@import '../components/footer/footer';
 /* endinject */

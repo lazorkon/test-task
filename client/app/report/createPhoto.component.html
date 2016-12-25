@@ -1,0 +1,32 @@
+<div>
+    <form name="form" ng-submit="$ctrl.submit()">
+        <div class="form-group" ng-if="$ctrl.users">
+            <label for="element-user">User</label>
+            <select class="form-control" id="element-user" name="userId" ng-model="$ctrl.values.userId" ng-options="opt.id as opt.name for opt in $ctrl.users track by opt.id" required ng-change="$ctrl.userChange()"></select>
+            <div ng-show="form.$dirty">
+                <div class="help-block" ng-show="form.userId.$error.required">User is required and can not be empty</div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-if="$ctrl.values.userId">
+            <label for="element-albumId">Album</label>
+            <select class="form-control" id="element-albumId" name="albumId" ng-model="$ctrl.values.albumId" ng-options="opt.id as opt.title for opt in $ctrl.albums track by opt.id" required></select>
+            <div ng-show="form.$dirty">
+                <div class="help-block" ng-show="form.albumId.$error.required">Album is required and can not be empty</div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.title.$dirty}">
+            <label for="element-title">Title</label>
+            <input type="text" class="form-control" id="element-title" name="title" ng-model="$ctrl.values.title" required ng-minlength="3">
+            <div ng-show="form.$dirty">
+                <div class="help-block" ng-show="form.title.$error.required">Title is required and can not be empty</div>
+                <div class="help-block" ng-show="form.title.$error.minlength">Title should has at least 3 chars</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.busy || form.$invalid">Save</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,18 @@
+<div>
+    <filter-form on-reset="$ctrl.onFilterReset()" on-search="$ctrl.onFilterSearch(filter)"></filter-form>
+
+    <div class="list-group">
+        <a ng-repeat="album in $ctrl.list | limitTo: 100 track by album.id" class="list-group-item" href="#" ui-sref="photos(::{albumId: album.id})">
+            <h4 class="list-group-item-heading">{{::album.title}}</h4>
+                <div class="row">
+                    <div ng-repeat="photo in ::album.photos" class="col-md-2">
+                        <div class="thumbnail">
+                            <div afkl-lazy-image="{{::photo.thumbnailUrl}}" class="afkl-lazy-wrapper album-photo-thumb" alt="{{::photo.title}}"></div>
+                        </div>
+                    </div>
+                </div>
+            </p>
+        </a>
+    </div>
+
+</div>

@@ -2,6 +2,6 @@
 
 import angular from 'angular';
 
-export default angular.module('dashboardApp.constants', [])
+export default angular.module('app.constants', [])
   .constant('appConfig', require('../../server/config/environment/shared'))
   .name;

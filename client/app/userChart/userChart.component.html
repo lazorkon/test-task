@@ -1,0 +1,20 @@
+<div>
+    <div class="row" ng-if="$ctrl.originalList">
+        <div class="col-md-4 col-md-push-8">
+            <form class="form-horizontal">
+                <div class="checkbox" ng-repeat="user in $ctrl.originalList track by user.id">
+                    <label>
+                        <input type="checkbox" ng-model="$ctrl.filter.user[user.id]" ng-change="$ctrl.filterChange()"> {{::user.name}}
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8 col-md-pull-4">
+            <highchart id="user-chart" ng-if="$ctrl.chartConfig" config="$ctrl.chartConfig"></highchart>
+            <p class="text-muted">
+                Click on the legend labels to hide/show chart series.
+            </p>
+        </div>
+    </div>
+
+</div>

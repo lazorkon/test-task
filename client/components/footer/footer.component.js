@@ -1,6 +1,10 @@
 import angular from 'angular';
 
-export class FooterComponent {}
+export class FooterComponent {
+  constructor() {
+    this.year = new Date().getFullYear();
+  }
+}
 
 export default angular.module('directives.footer', [])
   .component('footer', {

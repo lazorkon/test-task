@@ -1,0 +1,14 @@
+<form name="form" ng-submit="form.$valid && $ctrl.search($event)">
+    <div class="form-group">
+        <label for="filter-query">Filter</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="filter-query" ng-model="$ctrl.data.query" ng-required="true" ng-minlength="2" placeholder="Search..." ng-change="$ctrl.change($event)" ng-model-options="{ debounce: 300 }">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="$ctrl.reset($event)">
+                    <span ng-show="$ctrl.data.query" class="glyphicon glyphicon-remove"></span>
+                    <span ng-hide="$ctrl.data.query" class="glyphicon glyphicon-ok"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
