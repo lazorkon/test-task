@@ -1,6 +1,6 @@
 'use strict';
 
-var express = require('express');
+import express from 'express';
 
 /**
  * Using Rails-like standard naming convention for endpoints.
@@ -40,7 +40,7 @@ const mapping = {
  */
 export default function routerFactory(controller, methods) {
   var router = express.Router();
-  (methods || Object.keys(methods)).forEach(function (name) {
+  (methods || Object.keys(mapping)).forEach(function (name) {
     mapping[name](router, controller);
   });
   return router;

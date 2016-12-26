@@ -1,8 +1,8 @@
 import app from './';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 after(function(done) {
   app.angularFullstack.on('close', () => done());
-  mongoose.connection.close();
+  // mongoose.connection.close();
   app.angularFullstack.close();
 });

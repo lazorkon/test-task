@@ -44,4 +44,7 @@ const UserListComponent = {
   template: require('./userList.component.html'),
 };
 
-export default UserListComponent;
+export {
+  UserListController,
+  UserListComponent as default
+};

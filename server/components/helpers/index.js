@@ -1,6 +1,5 @@
 'use strict';
 
-var console = require('console');
 import jsonpatch from 'fast-json-patch';
 import routerFactory from './routerFactory';
 import {HTTPError} from '../exception';
