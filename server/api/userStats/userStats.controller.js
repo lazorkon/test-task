@@ -7,8 +7,9 @@ import RemoteAlbum from '../album/remoteAlbum.model';
 import RemotePhoto from '../photo/remotePhoto.model';
 
 export function index(req, res) {
+  var filter = req.query && req.query.filter || {};
   return Promise.all([
-    new RemoteUser().list(req.query),
+    new RemoteUser().list(filter),
     new RemoteAlbum().list(),
     new RemotePhoto().list(),
   ]).spread(RemoteUser.getStat)

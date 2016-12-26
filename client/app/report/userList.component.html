@@ -1,8 +1,8 @@
 <div>
     <filter-form on-reset="$ctrl.onFilterReset()" on-search="$ctrl.onFilterSearch(filter)"></filter-form>
 
-    <div class="list-group">
-        <a ng-repeat="user in $ctrl.list | limitTo: 100 track by user.id" class="list-group-item" href="#" ui-sref="albums(::{userId: user.id})">
+    <div class="list-group" infinite-scroll="$ctrl.loadMore()" infinite-scroll-disabled="$ctrl.infiniteScrollDisabled" infinite-scroll-distance="1">
+        <a ng-repeat="user in $ctrl.list | limitTo: $ctrl.listLimit track by user.id" class="list-group-item" href="#" ui-sref="albums(::{userId: user.id})">
             <h4 class="list-group-item-heading">{{::user.name}}</h4>
             <p class="list-group-item-text">{{::user.email}}</p>
         </a>

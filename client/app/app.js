@@ -4,8 +4,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import loadingBar from 'angular-loading-bar';
 import toastr from 'angular-toastr';
-
-require('angular-lazy-image');
+import ngInfiniteScroll from 'ng-infinite-scroll';
 
 import {
   configureRoutes, configureApp, runApp
@@ -23,13 +22,10 @@ import userChart from './userChart';
 import './app.scss';
 
 angular.module('app', [
-  // ngCookies,
-  // ngResource,
-  // ngSanitize,
   uiRouter,
   loadingBar,
   toastr,
-  'afkl.lazyImage',
+  ngInfiniteScroll,
 
   navbar,
   footer,
@@ -43,6 +39,8 @@ angular.module('app', [
   .config(configureRoutes)
   .config(configureApp)
   .run(runApp);
+
+angular.module(ngInfiniteScroll).value('THROTTLE_MILLISECONDS', 250);
 
 angular.element(document)
   .ready(() => {

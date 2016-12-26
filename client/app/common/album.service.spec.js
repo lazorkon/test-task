@@ -24,13 +24,8 @@ describe('Service: AlbumService', function() {
 
     $httpBackend.when('GET', /\/api\/albums(?:\?.+)?/)
       .respond(function (method, url, data, headers, params) {
-        return generateAlbumList(params.userId);
+        return generateAlbumList(params.filter && params.filter.userId);
       });
-
-    // $httpBackend.expectGET('/api/albums?userId=7')
-    //   .respond(function (method, url, data, headers, params) {
-    //     return generateAlbumList(params.userId);
-    //   });
 
     albumService = _albumService_;
   }));

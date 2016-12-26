@@ -31,7 +31,7 @@ function CreatePhotoController($scope, userService, albumService, photoService) 
       return;
     }
     (function (userId) {
-      albumService.getList({userId}).then(function (albums) {
+      albumService.getList(userId).then(function (albums) {
         ctrl.albums = +ctrl.values.userId === +userId ? albums : null;
         return albums;
       });

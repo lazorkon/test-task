@@ -8,29 +8,43 @@ function AlbumDetailController(photoService, Util, filterFilter) {
   /*eslint consistent-this: ["error", "ctrl"]*/
   const ctrl = this;
 
-  const CHUNK_SIZE = 3;
-  const ROW_LIMIT = 30;
+  const chunkSize = 3;
+  const preloadPortion = 2;
 
   ctrl.originalList = [];
-  ctrl.list = [];
+  ctrl.groups = [];
   ctrl.filter = {};
+  ctrl.infiniteScrollDisabled = false;
+  ctrl.listLimit = preloadPortion;
 
   ctrl.$onInit = $onInit;
+  ctrl.loadMore = loadMore;
   ctrl.onFilterReset = onFilterReset;
   ctrl.onFilterSearch = onFilterSearch;
 
   ctrl.$onInit = $onInit;
 
   function $onInit() {
-    photoService.getList().then(data => {
+    photoService.getList(ctrl.albumId).then(data => {
       ctrl.originalList = data;
       filterList();
     });
   }
 
   function filterList() {
-    var list = filterFilter(ctrl.originalList.slice(0, CHUNK_SIZE * ROW_LIMIT), {title: ctrl.filter.query});
-    ctrl.groups = Util.chunkify(list, CHUNK_SIZE);
+    ctrl.infiniteScrollDisabled = false;
+    var list = ctrl.filter.query
+      ? filterFilter(ctrl.originalList, {title: ctrl.filter.query})
+      : ctrl.originalList.slice();
+    ctrl.groups = Util.chunkify(list, chunkSize);
+  }
+
+  function loadMore() {
+    if (ctrl.listLimit < ctrl.groups.length) {
+      ctrl.listLimit += preloadPortion;
+    } else {
+      ctrl.infiniteScrollDisabled = true;
+    }
   }
 
   function onFilterReset() {
@@ -45,6 +59,9 @@ function AlbumDetailController(photoService, Util, filterFilter) {
 }
 
 const AlbumDetailComponent = {
+  bindings: {
+    albumId: '<'
+  },
   controller: AlbumDetailController,
   template: require('./albumDetail.component.html'),
 };

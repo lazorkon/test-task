@@ -7,7 +7,8 @@ const remotePhoto = new RemotePhoto();
 
 // Gets a list of Photos
 export function index(req, res) {
-  return remotePhoto.list(req.query)
+  var filter = req.query && req.query.filter || {};
+  return remotePhoto.list(filter)
     .then(helpers.respondWithResult(res))
     .catch(helpers.handleError(res));
 }

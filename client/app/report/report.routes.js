@@ -14,6 +14,10 @@ function routeCfg($stateProvider) {
   $stateProvider.state('albums', {
     url: '/user-albums/{userId}',
     component: 'albumList',
+    resolve: {
+      /*@ngInject*/
+      userId: $stateParams => $stateParams.userId,
+    },
     data: {
       title: 'User Albums'
     }
@@ -22,6 +26,10 @@ function routeCfg($stateProvider) {
   $stateProvider.state('photos', {
     url: '/album-photos/{albumId}',
     component: 'albumDetail',
+    resolve: {
+      /*@ngInject*/
+      albumId: $stateParams => $stateParams.albumId,
+    },
     data: {
       title: 'Album Photos'
     }

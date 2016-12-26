@@ -14,10 +14,10 @@ function PhotoService($http, apiError, toastr) {
    * @returns {*}
    */
   function getList(albumId) {
-    var options = {};
-    if (albumId) {
-      options.params = {};
-      options.params.albumId = albumId;
+    var options = {params: {}};
+    options.paramSerializer = '$httpParamSerializerJQLike';
+    if (albumId != null) {
+      options.params.filter = {albumId};
     }
     return $http.get('/api/photos', options).then(response => response.data, apiError.handle);
   }

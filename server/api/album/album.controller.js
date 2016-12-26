@@ -7,8 +7,13 @@ const remoteAlbum = new RemoteAlbum();
 
 // Gets a list of Albums
 export function index(req, res) {
-  return remoteAlbum.list(req.query)
-    .then(RemoteAlbum.assignPhotosFn(5))
+  var filter = req.query && req.query.filter || {};
+  var options = req.query && req.query.options || {};
+  var promise = remoteAlbum.list(filter);
+  if (options.withPhotos) {
+    promise = promise.then(RemoteAlbum.assignPhotosFn(5));
+  }
+  return promise
     .then(helpers.respondWithResult(res))
     .catch(helpers.handleError(res));
 }

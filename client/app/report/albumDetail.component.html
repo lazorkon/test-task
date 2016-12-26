@@ -1,13 +1,14 @@
 <div>
     <filter-form on-reset="$ctrl.onFilterReset()" on-search="$ctrl.onFilterSearch(filter)"></filter-form>
 
-    <div ng-repeat="group in $ctrl.groups" class="row">
-        <div ng-repeat="photo in group track by photo.id" class="col-sm-4">
-            <div class="thumbnail">
-                <div afkl-lazy-image="{{::photo.url}}" class="afkl-lazy-wrapper album-photo"></div>
-                <!--<img ng-src="{{::photo.url}}" alt="{{::photo.title}}">-->
-                <div class="caption">
-                    <h3>{{::photo.title}}</h3>
+    <div infinite-scroll="$ctrl.loadMore()" infinite-scroll-disabled="$ctrl.infiniteScrollDisabled" infinite-scroll-distance="1">
+        <div ng-repeat="group in $ctrl.groups | limitTo: $ctrl.listLimit" class="row">
+            <div ng-repeat="photo in group track by photo.id" class="col-sm-4">
+                <div class="thumbnail">
+                    <img ng-src="{{::photo.url}}" alt="{{::photo.title}}">
+                    <div class="caption">
+                        <h3>{{::photo.title}}</h3>
+                    </div>
                 </div>
             </div>
         </div>
